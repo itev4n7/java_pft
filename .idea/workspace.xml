@@ -48,11 +48,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+              <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sandbox/src/test/java/ru/stqa/pft/sandbox/SquareTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,6 +87,8 @@
         <option value="$PROJECT_DIR$/sandbox/src/main/java/FirstProgram.java" />
         <option value="$PROJECT_DIR$/sandbox/src/main/java/ru/stqa/pft/sandbox/FirstProgram.java" />
         <option value="$PROJECT_DIR$/sandbox/build.gradle" />
+        <option value="$PROJECT_DIR$/sandbox/src/test/java/SquareTests.java" />
+        <option value="$PROJECT_DIR$/sandbox/src/test/java/ru/stqa/pft/sandbox/SquareTests.java" />
       </list>
     </option>
   </component>
@@ -131,6 +145,12 @@
             </path>
             <path>
               <item name="sandbox" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sandbox" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="sandbox" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -168,7 +188,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="TestNG.SquareTests">
     <configuration name="FirstProgram" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.stqa.pft.sandbox.FirstProgram" />
       <module name="sandbox.main" />
@@ -176,8 +196,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SquareTests" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="sandbox.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.stqa.pft.sandbox.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.stqa.pft.sandbox" />
+      <option name="MAIN_CLASS_NAME" value="ru.stqa.pft.sandbox.SquareTests" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SquareTests" />
         <item itemvalue="Application.FirstProgram" />
       </list>
     </recent_temporary>
@@ -196,7 +234,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1043" y="120" width="822" height="877" extended-state="0" />
+    <frame x="1005" y="147" width="822" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2564433" />
@@ -209,7 +247,7 @@
       <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32891247" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32891247" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -269,7 +307,17 @@
     <entry file="file://$PROJECT_DIR$/sandbox/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/src/test/java/ru/stqa/pft/sandbox/SquareTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
