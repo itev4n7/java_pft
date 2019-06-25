@@ -1,6 +1,9 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -45,14 +48,6 @@ public class ApplicationManager {
       }
    }
 
-   private boolean isAlertPresent() {
-      try {
-         driver.switchTo().alert();
-         return true;
-      } catch (NoAlertPresentException e) {
-         return false;
-      }
-   }
 
    private String closeAlertAndGetItsText() {
       try {
