@@ -15,6 +15,7 @@ import static org.testng.Assert.fail;
 
 public class ApplicationManager {
    WebDriver driver;
+   private ContactsHelper contactsHelper;
    private SessionHelper sessionHelper;
    private NavigationHelper navigationHelper;
    private GroupHelper groupHelper;
@@ -28,7 +29,22 @@ public class ApplicationManager {
    }
 
    public void init() {
+      selectionWebDriver();
+      baseUrl = "https://www.katalon.com/";
+      driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      driver.get("http://localhost:8080/group.php");
+      connectionWebDriver();
+      sessionHelper.login("admin", "admin");
+   }
 
+   private void connectionWebDriver() {
+      contactsHelper = new ContactsHelper(driver);
+      groupHelper = new GroupHelper(driver);
+      navigationHelper = new NavigationHelper(driver);
+      sessionHelper = new SessionHelper(driver);
+   }
+
+   private void selectionWebDriver() {
       if (browser.equals(BrowserType.CHROME)) {
          driver = new ChromeDriver();
       } else if (browser.equals(BrowserType.FIREFOX)) {
@@ -36,13 +52,6 @@ public class ApplicationManager {
       } else if (browser.equals(BrowserType.IE)) {
          driver = new InternetExplorerDriver();
       }
-      baseUrl = "https://www.katalon.com/";
-      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-      driver.get("http://localhost:8080/group.php");
-      groupHelper = new GroupHelper(driver);
-      navigationHelper = new NavigationHelper(driver);
-      sessionHelper = new SessionHelper(driver);
-      sessionHelper.login("admin", "admin");
    }
 
 
@@ -85,5 +94,9 @@ public class ApplicationManager {
 
    public NavigationHelper getNavigationHelper() {
       return navigationHelper;
+   }
+
+   public ContactsHelper getContactsHelper() {
+      return contactsHelper;
    }
 }
