@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactsData;
 
+import static org.testng.Assert.assertTrue;
+
 public class ContactsHelper extends HelperBase {
 
    public ContactsHelper(WebDriver driver) {
@@ -25,7 +27,6 @@ public class ContactsHelper extends HelperBase {
       } else {
          Assert.assertFalse(isElementPresent(By.name("new_group")));
       }
-
    }
 
    public void initContactCreation() {
@@ -46,5 +47,29 @@ public class ContactsHelper extends HelperBase {
 
    public void submitContactModification() {
       click(By.name("update"));
+   }
+
+   public void selectContacts() {
+      click(By.name("selected[]"));
+   }
+
+   public void deleteSelectedContacts() {
+      click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]"));
+   }
+
+   public void comfirmDeleteContacts() {
+      assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+   }
+
+   public void createContacts(ContactsData contactsData, boolean creation) {
+      initContactCreation();
+      next();
+      fillContactsForm(contactsData, creation);
+      submitContactCreation();
+      returnToHomePage();
+   }
+
+   public boolean isThereContacts() {
+      return isElementPresent(By.name("selected[]"));
    }
 }
