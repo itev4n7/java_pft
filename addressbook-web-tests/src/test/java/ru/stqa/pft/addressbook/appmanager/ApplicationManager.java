@@ -26,7 +26,7 @@ public class ApplicationManager {
    public void init() {
       selectionWebDriver();
       driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-      driver.get("http://localhost:8080/group.php");
+      driver.get("http://localhost:8080/");
       connectionWebDriver();
       sessionHelper.login("admin", "admin");
    }
