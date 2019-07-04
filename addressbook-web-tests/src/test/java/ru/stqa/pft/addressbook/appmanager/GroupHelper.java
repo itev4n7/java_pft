@@ -66,13 +66,28 @@ public class GroupHelper extends HelperBase {
    public List<GroupData> getGroupList() {
       List<GroupData> groups = new ArrayList<>();
       List<WebElement> elements = driver.findElements(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Groups'])[1]/following::form[1]"));
-      for (WebElement element : elements) {
-         String[] arrNameGroups = element.getText().split("\n");
-         for (String name : arrNameGroups) {
-            GroupData group = new GroupData(name, null, null);
-            groups.add(group);
+      String[] arrNameGroups = elements.get(0).getText().split("\n");
+      elements = driver.findElements(By.cssSelector("input"));
+      String[] arrId = new String[arrNameGroups.length];
+      for (int i = 0, j = 0; i < elements.size(); i++) {
+         if (isInteger(elements.get(i).getAttribute("value"))) {
+            arrId[j++] = elements.get(i).getAttribute("value");
          }
+      }
+      for (int i = 0; i < arrNameGroups.length; i++) {
+         GroupData group = new GroupData(arrId[i], arrNameGroups[i], null, null);
+         groups.add(group);
       }
       return groups;
    }
+
+   private boolean isInteger(String value) {
+      try {
+         int temp = Integer.parseInt(value);
+         return true;
+      } catch (Exception e) {
+         return false;
+      }
+   }
 }
+
