@@ -75,7 +75,7 @@ public class GroupHelper extends HelperBase {
          }
       }
       for (int i = 0; i < arrNameGroups.length; i++) {
-         GroupData group = new GroupData(arrId[i], arrNameGroups[i], null, null);
+         GroupData group = new GroupData(Integer.parseInt(arrId[i]), arrNameGroups[i], null, null);
          groups.add(group);
       }
       return groups;
