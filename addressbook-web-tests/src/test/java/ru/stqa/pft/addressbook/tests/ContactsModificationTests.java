@@ -4,16 +4,15 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactsData;
 
 public class ContactsModificationTests extends TestBase {
-   @Test(enabled = false)
+   @Test
    public void testContactsModification() {
-      app.getNavigationHelper().goToHomePage();
-      if (!app.getContactsHelper().isThereContacts()) {
-         app.getContactsHelper().createContacts(new ContactsData("email", "name", null, "test1"), true);
+      app.goTo().homePage();
+      if (!app.contacts().isThereContacts()) {
+         app.contacts().createContacts(new ContactsData("email", "name", null, "test1"), true);
       }
-      app.getContactsHelper().initContactModification();
-      app.getContactsHelper().fillContactsForm(new ContactsData("email", "name", "lastName", null), false);
-      app.getContactsHelper().submitContactModification();
-      app.getContactsHelper().returnToHomePage();
-
+      app.contacts().initModification();
+      app.contacts().fillForm(new ContactsData("email", "name", "lastName", null), false);
+      app.contacts().submitModification();
+      app.contacts().returnToHomePage();
    }
 }

@@ -4,9 +4,10 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactsData;
 
 public class ContactsCreationTests extends TestBase {
-   @Test(enabled = false)
+   @Test
    public void testContactSCreation() {
-      app.getNavigationHelper().goToHomePage();
-      app.getContactsHelper().createContacts(new ContactsData("email", "name", null, "test1"), true);
+      app.goTo().homePage();
+      app.contacts().createContacts(new ContactsData("email", "name", null, "test1"), true);
+      app.goTo().homePage();
    }
 }

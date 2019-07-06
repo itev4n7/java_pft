@@ -49,14 +49,14 @@ public class GroupHelper extends HelperBase {
       click(By.name("update"));
    }
 
-   public void createGroup(GroupData groupData) {
+   public void create(GroupData groupData) {
       initGroupCreation();
       fillCroupForm(groupData);
       submitGroupCreation();
       returnToGroupPage();
    }
 
-   public void modifyGroup(int index, GroupData group) {
+   public void modify(int index, GroupData group) {
       selectGroup(index);
       initGroupModification();
       fillCroupForm(group);
@@ -64,8 +64,10 @@ public class GroupHelper extends HelperBase {
       returnToGroupPage();
    }
 
-   public boolean isThereGroup() {
-      return isElementPresent(By.name("selected[]"));
+   public void delete(int index) {
+      selectGroup(index);
+      deleteSelectedGroups();
+      returnToGroupPage();
    }
 
    public void comperatorSortGroupData(List<GroupData> before, List<GroupData> after) {
@@ -78,7 +80,7 @@ public class GroupHelper extends HelperBase {
       return driver.findElements(By.name("selected[]")).size();
    }
 
-   public List<GroupData> getGroupList() {
+   public List<GroupData> list() {
       List<GroupData> groups = new ArrayList<>();
       List<WebElement> elements = driver.findElements(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Groups'])[1]/following::form[1]"));
       String[] arrNameGroups = elements.get(0).getText().split("\n");

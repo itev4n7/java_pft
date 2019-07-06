@@ -18,7 +18,7 @@ public class ContactsHelper extends HelperBase {
       click(By.linkText("home page"));
    }
 
-   public void fillContactsForm(ContactsData contactsData, boolean creation) {
+   public void fillForm(ContactsData contactsData, boolean creation) {
       type(By.name("email"), contactsData.getEmail());
       type(By.name("firstname"), contactsData.getName());
       type(By.name("lastname"), contactsData.getLastName());
@@ -41,30 +41,36 @@ public class ContactsHelper extends HelperBase {
       click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]"));
    }
 
-   public void initContactModification() {
+   public void initModification() {
       click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test1'])[1]/following::img[2]"));
    }
 
-   public void submitContactModification() {
+   public void submitModification() {
       click(By.name("update"));
    }
 
-   public void selectContacts() {
+   public void select() {
       click(By.name("selected[]"));
    }
 
-   public void deleteSelectedContacts() {
+   public void deleteSelected() {
       click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]"));
    }
 
-   public void comfirmDeleteContacts() {
+   public void comfirmDelete() {
       assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+   }
+
+   public void delete() {
+      select();
+      deleteSelected();
+      comfirmDelete();
    }
 
    public void createContacts(ContactsData contactsData, boolean creation) {
       initContactCreation();
       next();
-      fillContactsForm(contactsData, creation);
+      fillForm(contactsData, creation);
       submitContactCreation();
       returnToHomePage();
    }
