@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
@@ -57,6 +58,12 @@ public class GroupHelper extends HelperBase {
 
    public boolean isThereGroup() {
       return isElementPresent(By.name("selected[]"));
+   }
+
+   public void comperatorSortGroupData(List<GroupData> before, List<GroupData> after) {
+      Comparator<? super GroupData> byId = Comparator.comparing(GroupData::getId);
+      before.sort(byId);
+      after.sort(byId);
    }
 
    public int getGroupCount() {
