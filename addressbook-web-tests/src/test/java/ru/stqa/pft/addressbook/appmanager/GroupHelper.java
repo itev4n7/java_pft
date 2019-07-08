@@ -49,6 +49,7 @@ public class GroupHelper extends HelperBase {
       initGroupCreation();
       fillCroupForm(groupData);
       submitGroupCreation();
+      groupCache = null;
       returnToGroupPage();
    }
 
@@ -57,12 +58,14 @@ public class GroupHelper extends HelperBase {
       initGroupModification();
       fillCroupForm(group);
       submitGroupModification();
+      groupCache = null;
       returnToGroupPage();
    }
 
    public void delete(GroupData group) {
       selectGroupById(group.getId());
       deleteSelectedGroups();
+      groupCache = null;
       returnToGroupPage();
    }
 
@@ -84,8 +87,13 @@ public class GroupHelper extends HelperBase {
       return driver.findElements(By.name("selected[]")).size();
    }
 
+   private Groups groupCache = null;
+
    public Groups all() {
-      Groups groups = new Groups();
+      if (groupCache != null) {
+         return new Groups(groupCache);
+      }
+      groupCache = new Groups();
       List<WebElement> elements = driver.findElements(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Groups'])[1]/following::form[1]"));
       String[] arrNameGroups = elements.get(0).getText().split("\n");
       elements = driver.findElements(By.cssSelector("input"));
@@ -97,10 +105,10 @@ public class GroupHelper extends HelperBase {
       }
       if (arrId[0] != (null)) {
          for (int i = 0; i < arrNameGroups.length; i++) {
-            groups.add(new GroupData().withId(Integer.parseInt(arrId[i])).withName(arrNameGroups[i]));
+            groupCache.add(new GroupData().withId(Integer.parseInt(arrId[i])).withName(arrNameGroups[i]));
          }
       }
-      return groups;
+      return new Groups(groupCache);
    }
 
    private boolean isInteger(String value) {
