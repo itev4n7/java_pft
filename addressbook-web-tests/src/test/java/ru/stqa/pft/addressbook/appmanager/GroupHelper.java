@@ -4,11 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -85,8 +84,8 @@ public class GroupHelper extends HelperBase {
       return driver.findElements(By.name("selected[]")).size();
    }
 
-   public Set<GroupData> all() {
-      Set<GroupData> groups = new HashSet<>();
+   public Groups all() {
+      Groups groups = new Groups();
       List<WebElement> elements = driver.findElements(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Groups'])[1]/following::form[1]"));
       String[] arrNameGroups = elements.get(0).getText().split("\n");
       elements = driver.findElements(By.cssSelector("input"));
@@ -96,9 +95,10 @@ public class GroupHelper extends HelperBase {
             arrId[j++] = elements.get(i).getAttribute("value");
          }
       }
-      for (int i = 0; i < arrNameGroups.length; i++) {
-         GroupData group = new GroupData(Integer.parseInt(arrId[i]), arrNameGroups[i], null, null);
-         groups.add(group);
+      if (arrId[0] != (null)) {
+         for (int i = 0; i < arrNameGroups.length; i++) {
+            groups.add(new GroupData().withId(Integer.parseInt(arrId[i])).withName(arrNameGroups[i]));
+         }
       }
       return groups;
    }
