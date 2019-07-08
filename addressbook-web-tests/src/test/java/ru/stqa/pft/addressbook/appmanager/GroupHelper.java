@@ -5,9 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -37,10 +38,6 @@ public class GroupHelper extends HelperBase {
       click(By.name("delete"));
    }
 
-   public void selectGroup(int index) {
-      driver.findElements(By.name("selected[]")).get(index).click();
-   }
-
    public void initGroupModification() {
       click(By.name("edit"));
    }
@@ -56,18 +53,22 @@ public class GroupHelper extends HelperBase {
       returnToGroupPage();
    }
 
-   public void modify(int index, GroupData group) {
-      selectGroup(index);
+   public void modify(GroupData group) {
+      selectGroupById(group.getId());
       initGroupModification();
       fillCroupForm(group);
       submitGroupModification();
       returnToGroupPage();
    }
 
-   public void delete(int index) {
-      selectGroup(index);
+   public void delete(GroupData group) {
+      selectGroupById(group.getId());
       deleteSelectedGroups();
       returnToGroupPage();
+   }
+
+   private void selectGroupById(int id) {
+      driver.findElement(By.cssSelector("input[value='" + id + "']")).click();
    }
 
    public void comperatorSortGroupData(List<GroupData> before, List<GroupData> after) {
@@ -76,12 +77,16 @@ public class GroupHelper extends HelperBase {
       after.sort(byId);
    }
 
+   public boolean isThereAGroup() {
+      return isElementPresent(By.name("selected[]"));
+   }
+
    public int getGroupCount() {
       return driver.findElements(By.name("selected[]")).size();
    }
 
-   public List<GroupData> list() {
-      List<GroupData> groups = new ArrayList<>();
+   public Set<GroupData> all() {
+      Set<GroupData> groups = new HashSet<>();
       List<WebElement> elements = driver.findElements(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Groups'])[1]/following::form[1]"));
       String[] arrNameGroups = elements.get(0).getText().split("\n");
       elements = driver.findElements(By.cssSelector("input"));
@@ -106,5 +111,6 @@ public class GroupHelper extends HelperBase {
          return false;
       }
    }
+
 }
 
