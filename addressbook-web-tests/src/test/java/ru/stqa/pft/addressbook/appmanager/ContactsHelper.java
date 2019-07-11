@@ -2,9 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.ContactsData;
+
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -15,7 +19,7 @@ public class ContactsHelper extends HelperBase {
    }
 
    public void returnToHomePage() {
-      click(By.linkText("home page"));
+      click(By.linkText("home"));
    }
 
    public void fillForm(ContactsData contactsData, boolean creation) {
@@ -42,7 +46,7 @@ public class ContactsHelper extends HelperBase {
    }
 
    public void initModification() {
-      click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='test1'])[1]/following::img[2]"));
+      click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='email'])[1]/following::img[2]"));
    }
 
    public void submitModification() {
@@ -65,17 +69,55 @@ public class ContactsHelper extends HelperBase {
       select();
       deleteSelected();
       comfirmDelete();
+      contactsCache = null;
+      returnToHomePage();
    }
 
-   public void createContacts(ContactsData contactsData, boolean creation) {
+   public void modification(ContactsData contacts, boolean creation) {
+      initModification();
+      fillForm(contacts, creation);
+      submitModification();
+      contactsCache = null;
+      returnToHomePage();
+   }
+
+   public void create(ContactsData contactsData, boolean creation) {
       initContactCreation();
       next();
       fillForm(contactsData, creation);
       submitContactCreation();
+      contactsCache = null;
       returnToHomePage();
    }
 
-   public boolean isThereContacts() {
+   public boolean isThereAContacts() {
       return isElementPresent(By.name("selected[]"));
+   }
+
+   private Contacts contactsCache = null;
+
+   public Contacts all() {
+      if (contactsCache != null) {
+         return new Contacts(contactsCache);
+      }
+      contactsCache = new Contacts();
+      List<WebElement> elements = driver.findElements(By.name("entry"));
+      if (elements.size() != 0) {
+         String[] arrElements = new String[elements.size()];
+         String[] arrId = new String[elements.size()];
+         for (int i = 0; i < arrElements.length; i++) {
+            arrElements[i] = elements.get(i).getText();
+            arrId[i] = elements.get(i).findElement(By.cssSelector("input")).getAttribute("value");
+         }
+         for (int i = 0; i < arrElements.length; i++) {
+            String[] temp = arrElements[i].split(" ");
+            contactsCache.add(new ContactsData().setId(Integer.parseInt(arrId[i])).setEmail(temp[2]).setName(temp[1]).setLastName(temp[0]));
+         }
+      }
+      return new Contacts(contactsCache);
+   }
+
+   public int count() {
+      return driver.findElements(By.name("selected[]")).size();
    }
 }

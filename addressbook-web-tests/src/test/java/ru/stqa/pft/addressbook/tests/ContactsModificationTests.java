@@ -1,18 +1,31 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.ContactsData;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactsModificationTests extends TestBase {
+
+   @BeforeMethod
+   public void ensurePreconditions() {
+      app.goTo().homePage();
+      if (app.contacts().all().size()==0) {
+         app.contacts().create(new ContactsData().setEmail("email").setName("name").setLastName("last").setGroup("test3"), true);
+      }
+   }
+
    @Test
    public void testContactsModification() {
-      app.goTo().homePage();
-      if (!app.contacts().isThereContacts()) {
-         app.contacts().createContacts(new ContactsData("email", "name", null, "test1"), true);
-      }
-      app.contacts().initModification();
-      app.contacts().fillForm(new ContactsData("email", "name", "lastName", null), false);
-      app.contacts().submitModification();
-      app.contacts().returnToHomePage();
+      Contacts before = app.contacts().all();
+      ContactsData modifyContacts = before.iterator().next();
+      ContactsData contacts = new ContactsData().setId(modifyContacts.getId()).setEmail("email").setName("name").setLastName("last");
+      app.contacts().modification(contacts, false);
+      assertThat(app.contacts().count(), equalTo(before.size()));
+      Contacts after = app.contacts().all();
+      assertThat(after, equalTo(before.withOut(modifyContacts).withAdded(contacts)));
    }
 }
