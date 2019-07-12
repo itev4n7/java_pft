@@ -110,9 +110,9 @@ public class ContactsHelper extends HelperBase {
          int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
          String[] fullName = cells.get(2).getText().split(" ");
          String email = cells.get(4).getText();
-         String[] phones = cells.get(5).getText().split("\n");
+         String allPhones = cells.get(5).getText();
          contactsCache.add(new ContactsData().setId(id).setEmail(email).setName(fullName[1]).setLastName(fullName[0])
-                 .setHomePhone(phones[0]).setMobilePhone(phones[1]).setWorkPhone(phones[2]));
+                 .setAllPhones(allPhones));
       }
       return new Contacts(contactsCache);
    }
