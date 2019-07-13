@@ -65,9 +65,9 @@ public class GroupDataGenerator {
    }
 
    private void writeFormat(File file, String format) throws IOException {
-      Writer writer = new FileWriter(file);
-      writer.write(format);
-      writer.close();
+      try (Writer writer = new FileWriter(file)) {
+         writer.write(format);
+      }
    }
 
    private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
