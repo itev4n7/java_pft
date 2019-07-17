@@ -1,10 +1,5 @@
 [
   {
-    "name": "test0",
-    "header": "header0",
-    "footer": "footer0"
-  },
-  {
     "name": "test1",
     "header": "header1",
     "footer": "footer1"
@@ -13,10 +8,5 @@
     "name": "test2",
     "header": "header2",
     "footer": "footer2"
-  },
-  {
-    "name": "test3",
-    "header": "header3",
-    "footer": "footer3"
   }
 ]
