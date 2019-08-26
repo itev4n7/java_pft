@@ -1,9 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = "FirstProgram"
+mainClassName = "ru.stqa.pft.sandbox.FirstProgram"
 repositories {
     mavenCentral()
 }
 dependencies {
-    implementation 'com.slickqa:testng:7.0.0-7'
+    implementation 'org.testng:testng:7.0.0'
 }
